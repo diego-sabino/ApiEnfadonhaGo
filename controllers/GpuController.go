@@ -23,9 +23,21 @@ func GetGpuById(c *gin.Context) {
 
 func UpdateGpuById(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var Gpu []models.Gpu
-	gpuUpdated := database.DB.First(&Gpu, id)
-	database.DB.Save(gpuUpdated)
+	var Gpu models.Gpu
+	database.DB.First(&Gpu, id)
+
+	if err := c.ShouldBindJSON(&Gpu); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := models.ValidateGpuData(&Gpu); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
+	database.DB.Model(&Gpu).UpdateColumns(Gpu)
 	c.JSON(http.StatusOK, Gpu)
 }
 

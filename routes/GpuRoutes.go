@@ -11,6 +11,7 @@ func HandleRequests() {
 	r.GET("/gpu", controllers.AllGpus)
 	r.POST("/gpu", controllers.CreateNewGpu)
 	r.GET("/gpu/:id", controllers.GetGpuById)
+	r.PUT("/gpu/:id", controllers.UpdateGpuById)
 	r.DELETE("/gpu/:id", controllers.DeleteGpu)
 	r.Run()
 }
