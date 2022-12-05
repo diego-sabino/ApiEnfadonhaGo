@@ -1,7 +1,11 @@
 package main
 
-import "mymodule/database"
+import (
+	"mymodule/database"
+	"mymodule/routes"
+)
 
 func main() {
 	database.ConnectDB()
+	routes.HandleRequests()
 }
