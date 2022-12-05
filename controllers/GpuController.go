@@ -21,6 +21,13 @@ func DeleteGpu(c *gin.Context) {
 	c.JSON(http.StatusNoContent, Gpu)
 }
 
+func GetGpuById(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var Gpu []models.Gpu
+	database.DB.First(&Gpu, id)
+	c.JSON(http.StatusOK, Gpu)
+}
+
 func CreateNewGpu(c *gin.Context) {
 	var Gpu models.Gpu
 	if err := c.ShouldBindJSON(&Gpu); err != nil {
