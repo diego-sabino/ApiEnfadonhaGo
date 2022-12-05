@@ -9,5 +9,6 @@ import (
 func HandleRequests() {
 	r := gin.Default()
 	r.GET("/gpu", controllers.AllGpus)
+	r.POST("/gpu", controllers.AllGpus)
 	r.Run()
 }
