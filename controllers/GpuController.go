@@ -11,7 +11,14 @@ import (
 func AllGpus(c *gin.Context) {
 	var Gpu []models.Gpu
 	database.DB.Find(&Gpu)
-	c.JSON(200, Gpu)
+	c.JSON(http.StatusOK, Gpu)
+}
+
+func DeleteGpu(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var Gpu []models.Gpu
+	database.DB.Delete(&Gpu, id)
+	c.JSON(http.StatusNoContent, Gpu)
 }
 
 func CreateNewGpu(c *gin.Context) {
