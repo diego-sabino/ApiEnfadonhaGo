@@ -2,6 +2,7 @@ package database
 
 import (
 	"log"
+	"mymodule/models"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -18,4 +19,5 @@ func ConnectDB() {
 	if err != nil {
 		log.Panic("error connecting to database")
 	}
+	DB.AutoMigrate(&models.Gpu{})
 }
