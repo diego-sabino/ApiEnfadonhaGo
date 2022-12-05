@@ -14,18 +14,26 @@ func AllGpus(c *gin.Context) {
 	c.JSON(http.StatusOK, Gpu)
 }
 
-func DeleteGpu(c *gin.Context) {
-	id := c.Params.ByName("id")
-	var Gpu []models.Gpu
-	database.DB.Delete(&Gpu, id)
-	c.JSON(http.StatusNoContent, Gpu)
-}
-
 func GetGpuById(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var Gpu []models.Gpu
 	database.DB.First(&Gpu, id)
 	c.JSON(http.StatusOK, Gpu)
+}
+
+func UpdateGpuById(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var Gpu []models.Gpu
+	gpuUpdated := database.DB.First(&Gpu, id)
+	database.DB.Save(gpuUpdated)
+	c.JSON(http.StatusOK, Gpu)
+}
+
+func DeleteGpu(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var Gpu []models.Gpu
+	database.DB.Delete(&Gpu, id)
+	c.JSON(http.StatusNoContent, Gpu)
 }
 
 func CreateNewGpu(c *gin.Context) {
