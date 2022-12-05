@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"log"
 	"mymodule/models"
 
@@ -20,4 +21,5 @@ func ConnectDB() {
 		log.Panic("error connecting to database")
 	}
 	DB.AutoMigrate(&models.Gpu{})
+	fmt.Println("nice")
 }
